@@ -16,7 +16,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  * @author DISPLAY
  */
 public class hello_bot extends TelegramLongPollingBot{
-    int  act=0; //0=Enviar Bienvenido... // -1=
+    int  act=0;
     int suma=0;
     int valor=0;
     public static boolean isNumeric(String str) { 
@@ -26,22 +26,23 @@ public class hello_bot extends TelegramLongPollingBot{
     } catch(NumberFormatException e){  
       return false;  
     }  
-  }
-    @Override
-    public String getBotToken() {
-        return "2018293755:AAFuiyGDM8VYZlXzcJgx7jw5DVxe22-21fk";
     }
-    
-    public void Menu(Update update){
+    public void Menu(Update update, String b){
        SendMessage message = new SendMessage();
        message.setChatId(update.getMessage().getChatId().toString()); //Define a quien le vamos a enviar el mensaje
-                message.setText("Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
+                message.setText(b);
                 try {
                     execute(message); // Envia el mensaje
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
     }
+    @Override
+    public String getBotToken() {
+        return "2018293755:AAFuiyGDM8VYZlXzcJgx7jw5DVxe22-21fk";
+    }
+    
+    
     
     @Override
     public void onUpdateReceived(Update update) {
@@ -49,7 +50,7 @@ public class hello_bot extends TelegramLongPollingBot{
         SendMessage message = new SendMessage();
             if(act==0)
             {
-                Menu(update);
+                Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n" );
                 act=-1;
             }
             else
@@ -69,7 +70,7 @@ public class hello_bot extends TelegramLongPollingBot{
                 {
                     if(valor==0)
                     {
-                        Menu(update);
+                        Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
                     }
                 }
             }
@@ -78,43 +79,27 @@ public class hello_bot extends TelegramLongPollingBot{
             switch(act)
             {
                 case 1:
-                    message.setChatId(update.getMessage().getChatId().toString()); //Define a quien le vamos a enviar el mensaje
-                    message.setText("Ingrese el primer número:");
-                    try {
-                        execute(message); // Envia el mensaje
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
+                    
+                    Menu(update, "Ingrese el primer número:" );
                     act=3;
                     break;
                 case 2: 
-                    message.setChatId(update.getMessage().getChatId().toString()); //Define a quien le vamos a enviar el mensaje
-                    message.setText("Funcionalidad no implementada, intente otro día");
-                    try {
-                        execute(message); // Envia el mensaje
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
+                    
+                    Menu(update, "Funcionalidad no implementada, intente otro día" );
                     act=-1;
                     valor=0;
-                    Menu(update);
+                    Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
                     break;
                 case 3:
                     if(isNumeric(update.getMessage().getText()) == true)
                     {
-                        suma = suma + Integer.parseInt(update.getMessage().getText());
-                        message.setChatId(update.getMessage().getChatId().toString()); //Define a quien le vamos a enviar el mensaje
-                        message.setText("Ingrese el segundo número:");
-                        try {
-                            execute(message); // Envia el mensaje
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
+                       suma = suma + Integer.parseInt (update.getMessage().getText());
+                        Menu(update, "Ingrese el segundo número:" );
                         act=4;
                     }
                     else
                     {
-                        Menu(update);
+                        Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
                         act=-1;
                         valor=0;
                         suma=0;
@@ -135,11 +120,11 @@ public class hello_bot extends TelegramLongPollingBot{
                         suma=0;
                         act=-1;
                         valor=0;
-                        Menu(update);
+                        Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
                     }
                     else
                     {
-                        Menu(update);
+                        Menu(update, "Bienvenido al Bot Calculadora\nSeleccione una de las siguientes opciones\n1.- Sumar 2 numeros\n2.-Calcular Fibonacci\n");
                         act=-1;
                         valor=0;
                         suma=0;
