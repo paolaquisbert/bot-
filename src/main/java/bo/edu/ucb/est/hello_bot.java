@@ -39,7 +39,7 @@ public class hello_bot extends TelegramLongPollingBot{
     }
     @Override
     public String getBotToken() {
-        return "2018293755:AAFuiyGDM8VYZlXzcJgx7jw5DVxe22-21fk";
+        return "";
     }
     
     
@@ -131,8 +131,6 @@ public class hello_bot extends TelegramLongPollingBot{
                     }
                     break;
             }
-            
-            
             // Creo el objeto para enviar un mensaje
             
             //Recibir 
@@ -145,7 +143,7 @@ public class hello_bot extends TelegramLongPollingBot{
     
     @Override
     public String getBotUsername() {
-        return "ucb_java_bot";
+        return "";
     }
 
     
